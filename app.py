@@ -116,9 +116,7 @@ if prompt := st.chat_input("What legal question or issue do you need help with?"
         try:
             response = client.chat.completions.create(
                 model="tiiuae/falcon-180B-chat",
-                messages=[
-                    {"role": "user", "content": prompt}
-                ],
+                messages=st.session_state.messages,
                 max_tokens=st.session_state.max_tokens,
                 temperature=st.session_state.temperature,
                 top_p=st.session_state.top_p
