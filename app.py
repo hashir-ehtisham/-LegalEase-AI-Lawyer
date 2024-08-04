@@ -9,7 +9,7 @@ client = AI71(ai71_api_key)
 
 # Set page config with title and favicon
 st.set_page_config(
-    page_title="LegalEase 🧑‍⚖️",
+    page_title="LegalMind 🧑‍⚖️",
     page_icon="assets/lawyer_icon.png",  # Replace with your favicon path
 )
 
@@ -58,10 +58,10 @@ st.markdown(
 
 # Sidebar
 st.sidebar.write("""
-**Legal Ease** is your intelligent assistant for legal advice and information. Powered by advanced AI technology, Legal Ease helps you understand legal matters by providing detailed insights and potential solutions. Whether you have questions about contracts, disputes, or legal procedures, Legal Ease is here to assist you.
+**Legal Mind** is your intelligent assistant for legal advice and information. Powered by advanced AI technology, Legal Mind helps you understand legal matters by providing detailed insights and potential solutions. Whether you have questions about contracts, disputes, or legal procedures, Legal Mind is here to assist you.
 """)
 
-st.sidebar.header("How to Use Legal Ease")
+st.sidebar.header("How to Use Legal Mind")
 st.sidebar.write("""
 1. **Enter Your Legal Question**:
    - Provide your legal query or describe the legal issue you are experiencing.
@@ -70,16 +70,16 @@ st.sidebar.write("""
    - Use the input field at the bottom of the page to enter your query.
 
 3. **Get a Response**:
-   - Legal Ease will process your input and generate a detailed response with relevant legal information and advice.
+   - Legal Mind will process your input and generate a detailed response with relevant legal information and advice.
 
 4. **Review and Take Action**:
-   - Read the response provided by Legal Ease and follow the suggested advice. Consult with a legal professional for further assistance if needed.
+   - Read the response provided by Legal Mind and follow the suggested advice. Consult with a legal professional for further assistance if needed.
 """)
 
 # Show title and description.
-st.markdown('<h1 class="title">Legal Ease 🧑‍⚖️</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="title">Legal Mind 🧑‍⚖️</h1>', unsafe_allow_html=True)
 st.write(
-    "This is your Legal Ease that uses the AI71 model to provide legal advice and information."
+    "This is your Legal Mind that uses the AI71 model to provide legal advice and information."
 )
 
 # Initialize session state variables if not already set
@@ -88,7 +88,7 @@ if "messages" not in st.session_state:
     st.session_state.max_tokens = 512
     st.session_state.temperature = 0.7
     st.session_state.top_p = 0.95
-    instruction = ("<span class='initial-message'>Hi! This is your Legal Ease 🧑‍⚖️. "
+    instruction = ("<span class='initial-message'>Hi! This is your Legal Mind 🧑‍⚖️. "
                    "Please describe your legal question or issue. For example: 'I need help "
                    "understanding a contract clause.'</span>")
     st.session_state.messages.append({"role": "assistant", "content": instruction})
