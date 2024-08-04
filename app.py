@@ -17,24 +17,39 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+    /* Set a light background and dark text color to ensure visibility in dark mode */
+    body {
+        background-color: #ffffff; /* White background */
+        color: #000000; /* Black text */
+    }
     .main {
-        background-color: #f0f4f8;
+        background-color: #f0f4f8; /* Light background */
+        color: #000000; /* Black text */
     }
     .sidebar .sidebar-content {
-        background-color: #003366;
+        background-color: #003366; /* Dark blue sidebar background */
+        color: #ffffff; /* White text in the sidebar */
     }
     .stButton>button {
-        color: #FFFFFF;
-        background-color: #003366;
+        color: #FFFFFF; /* White text for buttons */
+        background-color: #003366; /* Dark blue button background */
     }
     .stChatMessage--assistant {
-        background-color: #e0f7fa;
+        background-color: #e0f7fa; /* Light cyan background for assistant messages */
+        color: #000000; /* Black text for assistant messages */
     }
     .stChatMessage--user {
-        background-color: #ffffff;
+        background-color: #ffffff; /* White background for user messages */
+        color: #000000; /* Black text for user messages */
     }
     .title {
-        color: #003366;
+        color: #003366; /* Dark title color */
+    }
+    .initial-message {
+        color: #000000; /* Black text for the initial message */
+    }
+    .message-content {
+        color: #000000 !important; /* Black text for all messages */
     }
     </style>
     """,
@@ -73,17 +88,19 @@ if "messages" not in st.session_state:
     st.session_state.max_tokens = 512
     st.session_state.temperature = 0.7
     st.session_state.top_p = 0.95
-    instruction = "Hi! This is your Legal Ease 🧑‍⚖️. Please describe your legal question or issue. For example: 'I need help understanding a contract clause.'"
+    instruction = ("<span class='initial-message'>Hi! This is your Legal Ease 🧑‍⚖️. "
+                   "Please describe your legal question or issue. For example: 'I need help "
+                   "understanding a contract clause.'</span>")
     st.session_state.messages.append({"role": "assistant", "content": instruction})
 
 # Display the existing chat messages via st.chat_message.
 for message in st.session_state.messages:
     if message["role"] == "assistant":
         with st.chat_message("assistant"):
-            st.markdown(message["content"])
+            st.markdown(f"<div class='message-content'>{message['content']}</div>", unsafe_allow_html=True)
     elif message["role"] == "user":
         with st.chat_message("user"):
-            st.markdown(message["content"])
+            st.markdown(f"<div class='message-content'>{message['content']}</div>", unsafe_allow_html=True)
 
 # Create a chat input field to allow the user to enter a message. This will display
 # automatically at the bottom of the page.
@@ -92,7 +109,7 @@ if prompt := st.chat_input("What legal question or issue do you need help with?"
     # Store and display the current prompt.
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
-        st.markdown(prompt)
+        st.markdown(f"<div class='message-content'>{prompt}</div>", unsafe_allow_html=True)
 
     # Generate a response using the AI71 API.
     with st.spinner("Generating response..."):
@@ -116,7 +133,7 @@ if prompt := st.chat_input("What legal question or issue do you need help with?"
 
                 # Stream the full response to the chat using st.write
                 with st.chat_message("assistant"):
-                    st.markdown(full_response)
+                    st.markdown(f"<div class='message-content'>{full_response}</div>", unsafe_allow_html=True)
                 
                 st.session_state.messages.append({"role": "assistant", "content": full_response})
         except Exception as e:
